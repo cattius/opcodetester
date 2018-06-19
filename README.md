@@ -12,21 +12,28 @@ IMPORTANT: this code is only compatible with Intel x86-64 and has currently only
 ### XED
 OpcodeTester requires Intel XED to disassemble instructions and get information about the supported instruction set on different processor models. 
 
-```git clone https://github.com/intelxed/xed.git xed
-git clone https://github.com/intelxed/mbuild.git mbuild
-cd xed
-./mfile.py install
-```
+```git clone https://github.com/intelxed/xed.git xed```
+
+```git clone https://github.com/intelxed/mbuild.git mbuild```
+
+```cd xed```
+
+```./mfile.py install```
+
 
 ### Sandsifter
 OpcodeTester takes Sandsifter log files as input, so you should setup Sandsifter and run a scan on your computer before using OpcodeTester. Sandsifter and its documentation can be found on Github [here](https://github.com/xoreaxeaxeax/sandsifter), but for quick setup run the following: 
 
-```sudo apt-get install libcapstone3 libcapstone-dev
-sudo pip install capstone
-git clone https://github.com/xoreaxeaxeax/sandsifter.git
-cd sandsifter
-make CC=clang
-```
+```sudo apt-get install libcapstone3 libcapstone-dev```
+
+```sudo pip install capstone```
+
+```git clone https://github.com/xoreaxeaxeax/sandsifter.git```
+
+```cd sandsifter```
+
+```make CC=clang```
+
 
 Note: the CC=clang argument to make is not mentioned in Sandsifter's documentation, but is required as gcc fails to compile the code with the default Makefile. You can also add the -fPIC argument to the Makefile if you want to use gcc.
 
@@ -52,11 +59,7 @@ Download OpcodeTester to the same directory you cloned the xed and mbuild reposi
 
 ```git clone https://github.com/cattius/opcodetester.git```
 
-Next, replace the value of ```kitLocation``` in the top-level makefile with the name of the folder in xed/kits (by default, its name will include the date you installed it).
-
-Finally, return to the top-level installation folder:
-
-```make```
+Next, replace the value of ```kitLocation``` in the top-level makefile with the name of the folder in xed/kits (by default, its name will include the date you installed it), and run ```make```.
 
 ## Running
 
@@ -66,9 +69,9 @@ The third argument controls whether port analysis is on or off - port analysis o
 
 The final four arguments control which instructions are tested, in this order: valid instructions (Sandsifter false positives), instructions invalid for your microarchitecture but documented for a different microarchitecture, completely undocumented instructions, and instructions which are documented for your microarchitecture but only in other machine modes (not 64-bit).
 
-```chmod +x launcher.sh
-./launcher.sh input.txt logs/output.txt 1 logs/instrLog.txt 1 1 1 1
-```
+```chmod +x launcher.sh```
+
+```./launcher.sh input.txt logs/output.txt 1 logs/instrLog.txt 1 1 1 1```
 
 You can disable testing in ring 0 by changing USE_RING_0 in include/opcodeTester.h to 0.
 
