@@ -5,7 +5,9 @@ OpcodeTester: Analyse Undocumented Instructions on Intel x86/x86-64 and RISC-V
 
 OpcodeTester v2 is a series of CPU fuzzing and testing tools developed for my Master's thesis at Bristol University to investigate undocumented instruction behaviour. v2 now supports RISC-V (Linux and the SiFive Freedom Metal API) in addition to 32-bit x86, and x86-64 as in v1. All tools are in the version2 folder and also tagged v2.0.
 
-Lots of changes have been made since v1. The tool has had lots of stability improvements, enabling it to now support random fuzzing on x86. Try directed search (TEST_OPCODE_MAP_BLANKS) to test a hand-made set of suspicious gaps in Intel and AMD's opcode maps. Timing.c lets you run a timing attack on the three-byte opcode space or random fuzzing looking for timing anomalies. There are two new testing techniques (not yet built into OpcodeTester itself, but very valuable for individual experiments) using TSX and the specpoline mechanism to suppress exceptions.
+Lots of changes have been made since v1. The tool has had lots of stability improvements, enabling it to now support random fuzzing on x86. Try directed search (TEST_OPCODE_MAP_BLANKS) to test a hand-made set of suspicious gaps in Intel and AMD's opcode maps. Timing.c lets you run a timing attack on the three-byte opcode space or random fuzzing looking for timing anomalies. Configuration parameters for opcodeTester.c and timing.c on x86 can be found in opcodeTester.h.
+
+There are two new testing techniques (not yet built into OpcodeTester itself, but very valuable for individual experiments) using TSX and the specpoline mechanism to suppress exceptions.
 
 The misc folder contains various experiments including work on inferring instruction functionality which I didn't manage to complete. Stay tuned!
 
@@ -15,7 +17,7 @@ I've deprecated kernel testing entirely for the time being as it's just too like
 
 to
 
-```if(opcodeByteCount > 4) args->regs->ip += (opcodeByteCount - 2);```
+```if(opcodeByteCount > 4) args->regs->ip += (opcodeByteCount);```
 
 to avoid a crash (assuming you have recent microcode updates; the ones affecting my system were in a BIOS update rather than OS microcode patches).
 
