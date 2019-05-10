@@ -1,0 +1,6 @@
+The files in this folder depend on my fork of NanoBench:
+
+git clone https://github.com/cattius/nanoBench.git
+make
+
+I haven't included the entire library here as it's quite large, and the majority of the code isn't mine - I just adapted it to run experiments.
